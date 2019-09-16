@@ -73,7 +73,6 @@ public class Sender extends Thread {
  
         // Communication is broken. Interrupt both listener and sender threads
         	myInfo.myListener.interrupt();
-        	// myHandler.removeClient(myInfo);
 		cancel();
 
     	}
