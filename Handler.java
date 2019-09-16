@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.*;
 import java.lang.*;
 
-// Handler Class, this is the Server's work Thread or the Master Thread for the server, if you will. 
+// Handler Class, this is the Server's work Thread or the Master Thread for the server
 public class Handler extends Thread {
 
 	// Error Codes.
@@ -77,11 +77,7 @@ public class Handler extends Thread {
 			return true;
 
 		}
-
-		  // System.out.println("This Should Never Happen"); // Debugging Line, should never happen.
-
-		  // return false;
-
+		
 	}
 
 	// Method to remove a file from the FileList
@@ -148,9 +144,6 @@ public class Handler extends Thread {
 						oname = b.owner;
 
 						if (oname.equals(rname)) {
-
-							// System.out.println("Attempting to remove User: " + rname + "'s file: " + i2); // debug
-		
 							counter = counter + 1;
 							int index = myFileList.indexOf(b);
 
@@ -197,7 +190,7 @@ public class Handler extends Thread {
 		int activeIndex = myActives.indexOf(aClientsInfo); // Find where it is in the Active vector
 		rname = aClientsInfo.username;
 
-        	if (index != -1) { // Peace of mind. 
+        	if (index != -1) {
 
 			System.out.println("Attempting to remove User: " + aClientsInfo.username + "'s files."); // Server log
 			boolean rvm_suc = removeFiles(aClientsInfo);
@@ -378,7 +371,7 @@ public class Handler extends Thread {
 
 	}
 
-	// Prints socket info for the calling Client. AKA a "Who am I?". This is used for Debugging. 
+	// Prints socket info for the calling Client.
 	public synchronized void printSock(ClientInfo rInfo) {
 		String cList = "";
 
@@ -409,8 +402,6 @@ public class Handler extends Thread {
 		else { // Otherwise, if we're not logged in: 
 
 			for (int u = 0; u < list.size(); u++) { // For each registered user, 
-				// System.out.println(Integer.toString(list.size()));
-				// System.out.println(list.get(u).username);
 
 				if (list.get(u).username.equals(name) && list.get(u).password.equals(pd)) { // Make sure our credentials match.
 					// Set Operating client to active client. 
@@ -478,7 +469,6 @@ public class Handler extends Thread {
 			list.add(toAdd); // Add them to the list of Registered Users. 
 
 			if (isRegistered(name, info) == true) { // Double check they were properly registered. 
-				// info.username = "guest";
 
 				return true;
 			
@@ -487,7 +477,7 @@ public class Handler extends Thread {
 		}
 
 		// This should never occur. 
-		System.out.println("Something has gone horribly Awry in method: register"); // Server log. 
+		System.out.println("Something has gone horribly awry in method: register"); // Server log. 
 
 		return false;
 
@@ -517,8 +507,6 @@ public class Handler extends Thread {
 		return false;
 
 	}
-
-	// Here's the magic for Phase 1 & Server Communicator for Phase 2. 
 
 	// add a message to the server's message queue and notify it's thread to wake up - 
 	// - the message queue reader for Listener threads.
@@ -706,15 +694,8 @@ public class Handler extends Thread {
 					if (fput_succeed == true) {
 						//"FPUT_OK"
 						String fPut = "";
-
-						//rs = Success + ", " + fInfo.IP_addr + ", " + fInfo.port;
-
-						//FPUT(FPUT,filename,IP_Address,port) =>
-						//FPPUT(ERRCODE   ,    FPUT_OK		,  filename,          IP_ADDR,          PORT
 						fPut = Success + ", " + "FPUT_OK" + ", " + argTerms[1] + ", " + argTerms[2] + ", " + argTerms[3];
-						// fPut = Success + argTerms[2] + ", " + aClientsInfo.username + ", " + senderIP + ", " + senderPort;
-						// System.out.println(fPut);
-
+					
 						singleMsg(fPut, aClientsInfo);
 						System.out.println("User: " + aClientsInfo.username + " Successfully Placed their file: " + argTerms[2]); // Server log. 
 						System.out.println(fPut);
@@ -723,7 +704,6 @@ public class Handler extends Thread {
 
 					else {
 
-						// singleMsg("",aClientsInfo);
 						System.out.println("User: " + aClientsInfo.username + " Did NOT Put their file up! "); // Server log. 
 
 					}
