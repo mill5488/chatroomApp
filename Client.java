@@ -72,12 +72,6 @@ public class Client {
         	BufferedReader in = null; // Grab buffer reader to read from sockets.
         	PrintWriter out = null; // Grab buffer reader to write to socket.
 
-
-		// Testing Purposes. 
-		// System.out.println("Before connecting to server:");
-		// System.out.println("Here is your IP: " + host);
-		// System.out.println("Here is your port: " + serverPort);
-
         	try {
            		// Try to Connect to Server
            		Socket sock = new Socket(host, serverPort); // Our socket, way to communicate with Server.
@@ -126,8 +120,6 @@ public class Client {
 
 				}
 
-// Start of GET/PUT
-
 				else { // FPUT or FGET
 
 					// Don't know how many arguments I'll use in the end.
@@ -139,10 +131,6 @@ public class Client {
 						String fName = argTerms[2];
 						String myIP = argTerms[3];
 						String myPor = argTerms[4];
-
-						// System.out.println("User: " + myIP + " : " + myPor + ". Has Tried: ");
-						// System.out.println(saveMessage);
-
 						int myP = 0;
 						Scanner s = new Scanner(myPor);
 						myP = s.nextInt();
@@ -176,7 +164,6 @@ public class Client {
 
 						try {
 							fSock = new Socket(myIP, intPort); // Our socket, way to communicate with Server.
-							// System.out.println("Starting ClientFileListener"); // Client log.
 							ClientFileListener fListener = new ClientFileListener(fSock);
         						fListener.setDaemon(true);
         						fListener.start();
@@ -184,7 +171,6 @@ public class Client {
         					} 
 
 						catch (IOException ioe) {
-           						// System.err.println("Can not establish connection to " + host + " : " + serverPort); // Client log. 
            						ioe.printStackTrace();
            						System.exit(-1);
 
@@ -270,14 +256,10 @@ class SendingManager extends Thread {
 		String line = null;
 
 		try {	
-			// sock = new ServerSocket(myPort);
-
 			while (true) { // Accept new connections indefinitely. 
            			// Try to Connect to Client
 				sock = new ServerSocket(myPort);
 				Socket rSock = sock.accept();
-
-				// System.out.println("Starting ClientFileSender"); // Client log
 				ClientFileSender fSender = new ClientFileSender(rSock, fName);
         			fSender.setDaemon(true);
         			fSender.start();
@@ -287,28 +269,11 @@ class SendingManager extends Thread {
 		} 
 
 		catch (IOException ioe) {
-            		// ioe.printStackTrace();
 			cancel();
 
 		}
 
 	}
-
-/*
-
-	public synchronized void accept(int p, String f) {
-		// Try to Connect to Client
-		sock = new ServerSocket(p);
-		Socket rSock = sock.accept();
-
-		// System.out.println("Starting ClientFileSender"); // Client log
-		ClientFileSender fSender = new ClientFileSender(rSock, f);
-        	fSender.setDaemon(true);
-        	fSender.start();
-
-	}
-
-*/
 	
 	// Interrupt routine for Threads. 
 	public void cancel() {
@@ -336,7 +301,6 @@ class ClientFileSender extends Thread {
 		String line = null;
 		
 		try {	
-			// System.out.println("Trying to read, from: " + fName); // Client log.
 			FileReader reader = new FileReader(fName);
 			BufferedReader bufReader = new BufferedReader(reader);
 
@@ -347,10 +311,7 @@ class ClientFileSender extends Thread {
 
 			}
 
-			// System.out.println("HELLO!!! I AM STILL HERE"); // Debugging.
-			// output.close();
 			bufReader.close();
-			// reader.close();
 			cancel();
 
 		} 
@@ -391,16 +352,11 @@ class ClientFileListener extends Thread {
 
 	public void run() {
 		try {
-			// System.out.println("Name of file is: " + fName); // Client Log.
 			String line;
 
 			while (!isInterrupted() && ( ( line = Input.readLine() ) != null) ) {
-				// System.out.println("Attempting to Read line from Socket: "); // Client Log.
-				// String line = Input.readLine();
 
 				if (line == null || line == "\n" || line == "") {
-					// System.out.println("Line is Null.");
-
 					break;
 
 				}
