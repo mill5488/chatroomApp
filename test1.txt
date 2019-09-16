@@ -1,8 +1,8 @@
 L1, Hello, my name is Maxwell.
 L2, What if we decide to make this file longer?
-L3, YO YO YO
-L4, sdasd124
-L5, asdasdt66462t
+L3, the quickbrownfoxjumpsoverthelazydog
+L4, that is quite sad
+L5, howard you doing?
 L6, line 6
 L7, line 7
 L8, line 8
