@@ -9,11 +9,6 @@ import java.lang.*;
 
 // ClientList class. This class creates the list of registerd users. 
 public class ClientList {
-
-	// Choose ArrayList because they're easy to manipulate. Can Easily iterate over.
-	// Why not a Vector like the Active Clients and Operating Clients? 
-	// Well, use the Vectors for Clients since those are always in use, 
-	// Use ArrayList for registered users because most probably not in use. 
 	private ArrayList<ClientInfo> registeredList; 
 
 	// Default constructor.
